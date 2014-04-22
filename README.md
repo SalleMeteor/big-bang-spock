@@ -28,6 +28,6 @@ List of packages
   -Humane:   $ mrt add humane
   
 
-Deploy URL:
-=============================  
+Deploy URL
+================
   http://www.bigbang-spock.meteor.com
