@@ -30,4 +30,4 @@ List of packages
 
 Deploy URL
 ================
-  http://www.bigbang-spock.meteor.com
+  bigbang-spock.meteor.com

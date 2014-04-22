@@ -7,10 +7,27 @@ var PartidasJugador = new Meteor.Collection('partidaJugador');
 //Esta función controla las puntuaciones de los jugadores
 var puntuaciones = new Meteor.Collection('scores');
 
+
+Meteor.publish("scores" , function( userId ) {
+  puntuaciones.findOne({jugador:userId});
+  return 
+});
+
+Meteor.publish("getAllMesas", function() {
+  return Partidas.find();
+});
+
+Meteor.publish("getMesasData", function() {
+  return PartidasJugador.find();
+});
 Meteor.methods
   (
 
     {
+      //Función para ver cuantos usuarios hay en una mesa
+      getPlayersCount: function ( mesaId ){
+        return PartidasJugador.find( { name : mesaId } ).count();
+      },
       //Esta función nos devuelve los datos del jugador
       getScrote: function( userId ){
         var data = puntuaciones.findOne({jugador:userId});

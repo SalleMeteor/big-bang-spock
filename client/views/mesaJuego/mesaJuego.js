@@ -8,6 +8,7 @@ var mostrar = false;
 var jugable = true;
 
 Session.set('reveal' , false);
+Meteor.subscribe('getPartidaState' , Session.get('mesa') );
 Meteor.subscribe('jugadas');
 Meteor.subscribe('style');
 Meteor.subscribe('creadorFuera');
@@ -90,15 +91,6 @@ Template.mesaJuego.jugadas = function(){
   return Template.salaMesas.jugadas();
 } 
 
-Template.mesaJuego.add = function( carta ){
-  var m = Session.get('mesa');
-   mesas.insert({mesa : m , eleccion : carta } );
-}
-
-Template.mesaJuego.jugado = function(){
-  var m = Session.get('mesa');
-  return ( mesas.find( {mesa : m , jugador: Meteor.userId()} ).count() > 0 );
-}
 
 Template.mesaJuego.events
 (
@@ -139,7 +131,6 @@ Template.mesaJuego.creadorFuera = function(){
     Session.set('mesa',null);
     
     var notify = humane.create({ timeout: 4000, baseCls: 'humane-boldlight' });
-    
     notify.log(['Table Creator Disconected',  'Returning to Tables Room']);
     
     //humane.log();  

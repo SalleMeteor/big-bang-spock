@@ -1,7 +1,9 @@
-Template.salaMesas.mesa = Session.get('mesa');
-
 var partidas = new Meteor.Collection('partida');
 var partidasJugador = new Meteor.Collection('partidaJugador');
+
+Meteor.subscribe('getAllMesas');
+Meteor.subscribe('scores');
+Meteor.subscribe('getMesasData');
 
 Template.salaMesas.quedaSitio= function( mesaId ) {
   return Template.salaMesas.peoplePlaying(mesaId) < 5 ;
@@ -19,6 +21,7 @@ Template.salaMesas.peoplePlaying = function(mesaId){
   return partidasJugador.find( { name : mesaId } ).count();
 }
 
+
 Template.salaMesas.jugadas = function(){
      var m = Session.get('mesa');
       return partidasJugador.find( {name:m} );
@@ -29,7 +32,7 @@ Template.salaMesas.creador = function( creadorMesa ){
 }
 
 Template.salaMesas.partidasActivas = function(){
-  return  partidas.find();
+  return partidas.find();
 }
 
 Template.salaMesas.events
@@ -38,21 +41,15 @@ Template.salaMesas.events
     //Pulsamos encima de una carta, su nombre se guardará
     'click input#joinTable' : function(e)
     {
-      
-      //alert("eleccion " + e.target.name);
       Session.set('mesa' ,  e.target.name );
       Session.set('role' , 'player');
       Meteor.call('joinMesa', e.target.name , Meteor.userId());
-     // alert(e.target.name);
     },
      //Nos unimos como espectadores en la pantalla
     'click input#watchTable' : function(e)
     {
-      
-      //alert("eleccion " + e.target.name);
       Session.set('mesa' ,  e.target.name );
       Session.set('role' , 'watch');
-     // alert(e.target.name);
     },   
     //Pulsamos el boton de eliminar mesa
     'click input.borrar' : function(e)
@@ -76,7 +73,10 @@ Template.salaMesas.events
         Session.set('mesa' ,  nombre );
       }
       else
-        alert('Invalid name');
+      {
+        var notify = humane.create({ timeout: 4000, baseCls: 'humane-boldlight' });
+        notify.log('Invalid name');
+      }
 
     },
     
@@ -95,7 +95,10 @@ Template.salaMesas.events
         Session.set('mesa' ,  nombre );
       }
       else
-        alert('Invalid name');
+      {
+        var notify = humane.create({ timeout: 4000, baseCls: 'humane-boldlight' });
+        notify.log('Invalid name');
+      }
 
     }
   }
