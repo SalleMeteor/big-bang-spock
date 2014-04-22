@@ -1,0 +1,21 @@
+<template name="top">
+  <div id="top">
+  <table width="100%" >
+    <tr>
+      <td>
+          {{ > loginButtons }}
+      </td>
+      <td>
+        {{#if mesa}}
+        Table: {{ mesa }}
+        {{/if}}
+      </td>
+      <td>
+        <div class="resultado" id="derrotas"></div>
+        <div class="resultado" id="empates"></div>
+        <div class="resultado" id="victorias"></div>     
+      </td>
+    </tr>
+    </table>
+  </div>
+</template>

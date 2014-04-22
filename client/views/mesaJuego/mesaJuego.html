@@ -1,0 +1,26 @@
+<template name="mesaJuego">
+
+  <div id="mesaJuego">
+    {{#each jugadas }}
+    <div class="jugada" style={{style}}  >
+      {{#if espera}}
+          <img width="100%" src="images/back.png" />
+       {{else}}
+          {{#if mismo this.jugador}}
+           <img width="100%" src={{youSrc this }}  />   
+            <br>          
+              YOURS
+          {{else}}
+           <img width="100%" src={{imagenResultado this this.jugada}}  />   
+          {{/if}}
+      {{/if}}
+      
+    </div>
+    {{/each}}
+    
+    {{creadorFuera}}
+    
+      <div id="tiempo">
+      </div>
+  </div>
+</template>

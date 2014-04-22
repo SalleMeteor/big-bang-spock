@@ -1,0 +1,15 @@
+<template name = "home" >  
+  {{#if currentUser}}
+  
+      {{ > top }}
+  
+      {{#if mesa}}
+          {{ > mesaJuego }}
+          {{ > optionsBar }}
+      {{else}}
+          {{ > salaMesas }}
+      {{/if}}
+  {{else}}
+      {{ > login }}
+  {{/if}} 
+</template>
