@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "humane": {}
+    },
+    "packages": {
+      "humane": {
+        "git": "https://github.com/kvsm/meteor-humane.git",
+        "tag": "v3.1.0",
+        "commit": "3524918ed9395550ca5b6ad7aa33d8e3b3c5a02e"
+      }
+    }
+  }
+}

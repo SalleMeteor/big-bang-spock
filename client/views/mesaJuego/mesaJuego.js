@@ -137,7 +137,12 @@ Template.mesaJuego.creadorFuera = function(){
   if ( p < 1 )
   {
     Session.set('mesa',null);
-    alert('Table Creator Disconected, returning to Tables Room');  
+    
+    var notify = humane.create({ timeout: 4000, baseCls: 'humane-boldlight' });
+    
+    notify.log(['Table Creator Disconected',  'Returning to Tables Room']);
+    
+    //humane.log();  
   }
 }
 
