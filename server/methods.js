@@ -1,13 +1,12 @@
 //Todas las mesas con gente jugando 
 var Partidas = new Meteor.Collection('partida');
-//Todas las jugadas realizadas durante la partida
-var mesas = new Meteor.Collection('mesa');
 //Esta colección servirá para saber la gente que hay jugando actualmente y sus jugadas
 var PartidasJugador = new Meteor.Collection('partidaJugador');
 //Esta función controla las puntuaciones de los jugadores
 var puntuaciones = new Meteor.Collection('scores');
 
 
+//Publish de las 3 bases de datos
 Meteor.publish("scores" , function( userId ) {
   puntuaciones.findOne({jugador:userId});
   return 
@@ -20,20 +19,18 @@ Meteor.publish("getAllMesas", function() {
 Meteor.publish("getMesasData", function() {
   return PartidasJugador.find();
 });
+
+//Métodos de Meteor
 Meteor.methods
   (
 
     {
-      //Función para ver cuantos usuarios hay en una mesa
-      getPlayersCount: function ( mesaId ){
-        return PartidasJugador.find( { name : mesaId } ).count();
-      },
       //Esta función nos devuelve los datos del jugador
       getScrote: function( userId ){
         var data = puntuaciones.findOne({jugador:userId});
         if( data == undefined ){
          puntuaciones.insert({jugador:userId, ok : 0 , ko : 0 , draw : 0});
-           data = puntuaciones.findOne({jugador:userId});/**/
+           data = puntuaciones.findOne({jugador:userId});
         }
         return data;
       },
@@ -51,7 +48,7 @@ Meteor.methods
         if(Partidas.find({name:mesaId, creator:userId}).count() < 1 ){
            PartidasJugador.remove( {name: mesaId  , jugador: userId } );
            Partidas.remove({name:mesaId, creator:userId});
-          return 'NEIN';
+          return 'some return value';
         }
         //Otherwise
         mesas.remove({mesa:mesaId});
