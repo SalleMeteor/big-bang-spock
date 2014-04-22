@@ -12,16 +12,19 @@ Once you're done you'll be able to:
 Once you enter in the game, you choose one of your five options, the game will await until all the players make their choices
 Once all the players have made their moves the game will show the result and you'll add it to your own results and the next turn will start.
 You can leave the table by clicking the button 'leave table', if you're the creator, the table will disappear and all the players will go back to the Tables Room
+
 ===========================
 Members (name-login-github):
 
   Marc Flores Rodríguez - ls24371 - furoresu
   Sergi Ubach Pallàs    - ls24000 - sxubach
+
 ============================
 List of packages
 
   -Accounts: $ meteor add accounts-base accounts-password accounts-ui
   -Humane:   $ mrt add humane
+  
 =============================  
 Deploy URL:
 bigbang-spock.meteor.com
