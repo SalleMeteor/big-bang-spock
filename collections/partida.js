@@ -1,3 +1,6 @@
+//Todas las mesas con gente jugando 
+Partidas = new Meteor.Collection('partida');
+
 /*var partidas = new Meteor.Collection('partida');
 
 //Hay que configurar los permisos de las bbdd a los que se quieren acceder

@@ -1,30 +1,29 @@
-var partidas = new Meteor.Collection('partida');
-var partidasJugador = new Meteor.Collection('partidaJugador');
-
-Meteor.subscribe('getAllMesas');
-Meteor.subscribe('scores');
-Meteor.subscribe('getMesasData');
+Template.salaMesas.created = function(){
+  Meteor.subscribe('getAllMesas');
+  Meteor.subscribe('scores');
+  Meteor.subscribe('getMesasData');
+}
 
 Template.salaMesas.quedaSitio= function( mesaId ) {
   return Template.salaMesas.peoplePlaying(mesaId) < 5 ;
 }
 
 Template.salaMesas.noJugado = function(){
-  var j = partidasJugador.find( {name: Session.get('mesa')  , jugador: Meteor.userId() } );
+  var j = PartidasJugador.find( {name: Session.get('mesa')  , jugador: Meteor.userId() } );
 }
 
 Template.salaMesas.peoplePlayed = function( mesaId ){
-  return partidasJugador.find({ name: mesaId , src: 'images/back.png'}).count(); 
+  return PartidasJugador.find({ name: mesaId , src: 'images/back.png'}).count(); 
 }
 
 Template.salaMesas.peoplePlaying = function(mesaId){
-  return partidasJugador.find( { name : mesaId } ).count();
+  return PartidasJugador.find( { name : mesaId } ).count();
 }
 
 
 Template.salaMesas.jugadas = function(){
      var m = Session.get('mesa');
-      return partidasJugador.find( {name:m} );
+      return PartidasJugador.find( {name:m} );
 }
 
 Template.salaMesas.creador = function( creadorMesa ){
@@ -32,7 +31,7 @@ Template.salaMesas.creador = function( creadorMesa ){
 }
 
 Template.salaMesas.partidasActivas = function(){
-  return partidas.find();
+  return Partidas.find();
 }
 
 Template.salaMesas.events
@@ -66,7 +65,7 @@ Template.salaMesas.events
       
       var nombre = document.getElementById('nombreMesa').value;
       
-      if( nombre.length>0 && partidas.find( { name : nombre } ).count() == 0 )
+      if( nombre.length>0 && Partidas.find( { name : nombre } ).count() == 0 )
       {
         Meteor.call('creaMesa', nombre, Meteor.userId());
         Session.set('role' , 'creator');
@@ -88,7 +87,7 @@ Template.salaMesas.events
       
       var nombre = document.getElementById('nombreMesa').value;
       
-      if( nombre.length>0 && partidas.find( { name : nombre } ).count() == 0 )
+      if( nombre.length>0 && Partidas.find( { name : nombre } ).count() == 0 )
       {
         Meteor.call('creaMesa', nombre, Meteor.userId());
         Session.set('role' , 'creator');

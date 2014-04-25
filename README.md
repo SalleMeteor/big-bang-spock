@@ -1,6 +1,3 @@
-big-bang-spock
-==============
-App name: 
 BIG BANG SPOCK!
 ==============
 App description: 

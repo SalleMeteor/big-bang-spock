@@ -1,24 +1,3 @@
-//Todas las mesas con gente jugando 
-var Partidas = new Meteor.Collection('partida');
-//Esta colección servirá para saber la gente que hay jugando actualmente y sus jugadas
-var PartidasJugador = new Meteor.Collection('partidaJugador');
-//Esta función controla las puntuaciones de los jugadores
-var puntuaciones = new Meteor.Collection('scores');
-
-
-//Publish de las 3 bases de datos
-Meteor.publish("scores" , function( userId ) {
-  puntuaciones.findOne({jugador:userId});
-  return 
-});
-
-Meteor.publish("getAllMesas", function() {
-  return Partidas.find();
-});
-
-Meteor.publish("getMesasData", function() {
-  return PartidasJugador.find();
-});
 
 //Métodos de Meteor
 Meteor.methods
@@ -51,7 +30,7 @@ Meteor.methods
           return 'some return value';
         }
         //Otherwise
-        mesas.remove({mesa:mesaId});
+        //mesas.remove({mesa:mesaId});
         Partidas.remove({name:mesaId, creator:userId});
         PartidasJugador.remove({name:mesaId});
         return "some return value";
